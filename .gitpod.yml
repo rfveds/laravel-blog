@@ -1,0 +1,53 @@
+
+tasks:
+  - name: Install Laravel Sail
+    init: |
+      curl -s https://laravel.build/example-app | bash
+      echo "Laravel Installation completed, setting up..."
+    command: | 
+      gp sync-done install
+      cd example-app
+      vendor/bin/sail up
+
+  - name: Migrate Databases and Launch
+    command: |
+      gp sync-await install
+      sleep 10
+      cd example-app
+      vendor/bin/sail artisan migrate
+      gp preview $(gp url 80)
+
+  - name: Set Aliases in bash (use "sail" instead of vendor/bin/sail)
+    command: |
+      echo "alias sail='sh $([ -f sail ] && echo sail || echo vendor/bin/sail)'" >> /home/gitpod/.bash_aliases
+      source /home/gitpod/.bash_aliases
+
+ports:
+  - name: Laravel Webserver
+    description: Laravel Websserver
+    port: 80
+    onOpen: ignore
+  - name: MySQL Database
+    description: Laravel Websserver 
+    port: 3306
+    onOpen: ignore
+  - name: Mailtpit SMTP
+    description: Mailtpit Sending 
+    port: 1025
+    onOpen: ignore
+  - name: Mailtpit HTTP
+    description: Mailtpit Webinterface
+    port: 8025
+    onOpen: ignore
+  - name: Meilisearch
+    description: Meilisearch REST API
+    port: 7700
+    onOpen: ignore
+  - name: Redis
+    description: Redis Caching Service
+    port: 6379
+    onOpen: ignore
+  - name: Vite
+    description: Vite Development Server
+    port: 5173
+    onOpen: ignore
