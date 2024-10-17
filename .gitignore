@@ -21,6 +21,3 @@ Homestead.yaml
 Homestead.json
 /.vagrant
 .phpunit.result.cache
-
-# Uncomment if you want indeed to commit example-app
-example-app
