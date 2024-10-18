@@ -19,3 +19,4 @@ This is a template repo, you can create your own using this as a template. Or le
 * You may adopt the `.gitpod.yml` and the bash script using a *with* query. See the [Laravel installation guide](https://laravel.com/docs/11.x/installation#sail-on-linux) for details.
 * Build your own project...hope this saved you some time :)
 
+php artisan migrate:fresh --seed
